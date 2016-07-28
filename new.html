@@ -1,0 +1,52 @@
+<html>
+	<head>
+
+		<title>Dyno TRiP</title>
+
+		<link rel="stylesheet" href="dynoStyle.css" />
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script src="dynBox.js"></script>
+		<script src="page.js"></script>
+		<script>
+			function load() {
+				window.onresize = resizeWindow;
+				//x, y, width, height, minwidth, minheight, maxwidth, maxheight, inner
+				loadDynBox(document.getElementById('container'));
+				resizeWindow();
+				var width = 380;
+				var height = 330;
+				addDynBox(new DynBoxData(0,0,width,height,50,50,90000,90000,dogs,"dogBox"));
+				addDynBox(new DynBoxData(0,height,width,height,50,50,90000,90000,cat,"catBox"));
+				addDynBox(new DynBoxData(width,height,width,height,50,50,90000,90000,controls));
+				addDynBox(new DynBoxData(width,0,width,height,50,50,90000,90000,story));
+			}
+
+			function resizeWindow() {
+				document.getElementById("container").style.width = window.innerWidth - 2;
+				document.getElementById("container").style.height = window.innerHeight - 2;
+				containerResize();
+			}
+
+			function resized(n) {
+				switch(n) {
+				case "camara1":
+					resizeRobotImage(1);
+					break;
+				case "camara2":
+					resizeRobotImage(2);
+					break;
+				case "googlemap":
+					resizeGoogleMap();
+					break;
+				}
+			}
+		</script>
+		
+	</head>
+
+	<body onContextMenu="return false" onload="load()" style="color: white; overflow: hidden; background-color: 404040;">
+		<div id="container" style="position:absolute; border:1 solid; left:0; top:0;"></div>
+	</body>
+
+</html>
